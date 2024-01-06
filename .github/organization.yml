@@ -1,0 +1,20 @@
+name: "EntrevistadorInteligente"
+admins:
+  - JamiltonQuintero
+  - svg153
+teams:
+  - name: "admins"
+    description: "Administrators of the organization"
+    members:
+      - JamiltonQuintero
+      - svg153
+  - name: "all"
+    description: "All members of the organization"
+    members:
+      - JamiltonQuintero
+      - svg153
+      - Jorgeivan246
+      - Rpeche-pk
+      - gimore
+      - DarkCodePE
+default_branch_name: "main"
