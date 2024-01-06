@@ -17,4 +17,5 @@ teams:
       - Rpeche-pk
       - gimore
       - DarkCodePE
+      - ppsegura
 default_branch_name: "main"
