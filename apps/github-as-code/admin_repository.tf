@@ -30,6 +30,18 @@ module "admin" {
 
   default_branch_name = local.default_branch_name
 
+  default_branch_protection = {
+    enforce_admins                  = false
+    allows_deletions                = false
+    require_conversation_resolution = true
+
+    required_pull_request_reviews = {
+      dismiss_stale_reviews      = true
+      require_code_owner_reviews = true
+      restrict_dismissals        = false
+    }
+  }
+
   team_access = {
     admins = {
       team_id     = local.admins_team_id

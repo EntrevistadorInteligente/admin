@@ -51,14 +51,14 @@ resource "github_branch_protection" "main" {
   repository_id = github_repository.main.node_id
 
   pattern                         = github_branch_default.main.branch
-  enforce_admins                  = true
-  allows_deletions                = false
-  require_conversation_resolution = true
+  enforce_admins                  = var.default_branch_protection.enforce_admins
+  allows_deletions                = var.default_branch_protection.allows_deletions
+  require_conversation_resolution = var.default_branch_protection.require_conversation_resolution
 
   required_pull_request_reviews {
-    dismiss_stale_reviews      = true
-    require_code_owner_reviews = true
-    restrict_dismissals        = false
+    dismiss_stale_reviews      = var.default_branch_protection.required_pull_request_reviews.dismiss_stale_reviews
+    require_code_owner_reviews = var.default_branch_protection.required_pull_request_reviews.require_code_owner_reviews
+    restrict_dismissals        = var.default_branch_protection.required_pull_request_reviews.restrict_dismissals
   }
 }
 
