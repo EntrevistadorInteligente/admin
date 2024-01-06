@@ -14,11 +14,7 @@ Go to `./github/repos/<repo-name>.yml` file to change the settings for a specifi
 
 ## Docs
 
-![/assets/safe-settings_space.jpg](/assets/safe-settings_space.jpg)
-
-![/assets/safe-settings_demo_pipeline.jpg](/assets/safe-settings_demo_pipeline.jpg)
-
-For more details about the settings, please check the [sequence diagram](/assets/safe-settings_sequence.jpg)
+Go to this repo to know more about safe-settings (<https://github.com/svg153-org/admin#docs>)
 
 ## import repositories
 
@@ -28,3 +24,4 @@ make import-repo repo_name=<repo-name>
 
 <!-- Links -->
 [github-safe-settings]: https://github.com/github/safe-settings
+# admin

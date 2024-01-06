@@ -1,0 +1,24 @@
+# Check the schema in https://github.com/github/safe-settings
+repository:
+  auto_init: true
+  private: true
+  visibility: private
+  default_branch: main
+  has_issues: false
+  has_projects: false
+  has_discussions: false
+  has_wiki: false
+  allow_squash_merge: true
+  allow_merge_commit: false
+  allow_rebase_merge: false
+  allow_update_branch: false
+  delete_branch_on_merge: true
+  security:
+    enableVulnerabilityAlerts: true
+labels:
+  - name: 'added'
+    description: 'Added by safe-settings removing by all default'
+    color: 'ededed'
+teams:
+  - name: "all"
+    permission: "pull"
