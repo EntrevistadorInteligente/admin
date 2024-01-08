@@ -1,0 +1,8 @@
+framework:
+  - terraform
+directory:
+  - apps/github-as-code
+output: github_failed_only
+quiet: true
+soft-fail: false
+download-external-modules: true

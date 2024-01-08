@@ -1,0 +1,25 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  ##> github-actions:START
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "wednesday"
+    labels:
+      - "dependencies"
+  ##> github-actions:END
+  ##> terraform:START
+  - package-ecosystem: "terraform"
+    directory: "apps/github-as-code"
+    schedule:
+      interval: "weekly"
+      day: "wednesday"
+    labels:
+      - "dependencies"
+  ##> terraform:END
