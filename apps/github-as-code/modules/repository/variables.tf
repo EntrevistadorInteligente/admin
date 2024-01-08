@@ -88,6 +88,30 @@ variable "default_branch_name" {
   default     = "main"
 }
 
+variable "default_branch_protection" {
+  description = "The default branch protection configuration."
+  type = object({
+    enforce_admins                  = bool
+    allows_deletions                = bool
+    require_conversation_resolution = bool
+    required_pull_request_reviews = object({
+      dismiss_stale_reviews      = bool
+      require_code_owner_reviews = bool
+      restrict_dismissals        = bool
+    })
+  })
+  default = {
+    enforce_admins                  = true
+    allows_deletions                = false
+    require_conversation_resolution = true
+    required_pull_request_reviews = {
+      dismiss_stale_reviews      = true
+      require_code_owner_reviews = true
+      restrict_dismissals        = false
+    }
+  }
+}
+
 variable "team_access" {
   description = "The teams to grant access to the repository. team_access = { team_name = permission, ... }"
   type = map(object({
