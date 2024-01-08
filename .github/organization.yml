@@ -17,6 +17,7 @@ teams:
       - Rpeche-pk
       - gimore
       - DarkCodePE
+      - ppsegura
       - Coshiloco
       - Kirenai
 default_branch_name: "main"
