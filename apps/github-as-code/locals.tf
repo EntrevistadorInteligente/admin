@@ -7,4 +7,12 @@ locals {
   organization_admins = local.org_config.admins
   teams               = local.org_config.teams
   default_branch_name = local.org_config.default_branch_name
+  labels = {
+    "duplicate"   = { color = "cfd3d7", description = "This issue or pull request already exists" }
+    "help wanted" = { color = "008672", description = "Extra attention is needed" }
+    "question"    = { color = "d876e3", description = "Further information is requested" }
+    # others
+    "blocked"      = { color = "ff0000", description = "Blocked by another issue" }
+    "dependencies" = { color = "006b75", description = "Dependency updates" }
+  }
 }

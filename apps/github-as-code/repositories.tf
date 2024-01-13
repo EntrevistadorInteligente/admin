@@ -73,6 +73,8 @@ module "repository" {
     }
   }
 
+  labels = local.labels
+
   reviewers_team_slugs = [local.admins_team_id]
 
   variables = {}

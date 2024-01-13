@@ -38,7 +38,7 @@ resource "github_issue_labels" "main" {
     for_each = var.labels
 
     content {
-      name        = label.value.name
+      name        = label.key
       color       = label.value.color
       description = try(label.value.description, "")
     }
