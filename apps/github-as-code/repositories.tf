@@ -1,11 +1,31 @@
-module "admin" {
-  source = "./modules/repository"
+locals {
+  infra_repository = [
+    ".github",
+  ]
+  app_repositories = [
+    "analizador",
+    "EntrevistadorInteligente",
+    "generador-feedback",
+    "handbook",
+    "landing-entrevistador",
+    "orquestador",
+    "preparador-entrevista",
+  ]
+}
 
-  repository_name = "admin"
-  description     = "Global GitHub settings for all repositories."
+module "repository" {
+  for_each = toset(concat(
+    local.infra_repository,
+    local.app_repositories
+  ))
+
+  source = "./modules/repository_data"
+
+  repository_name = each.value
+  description     = ""
 
   visibility = "public"
-  topics     = ["github-configuration"]
+  topics     = []
 
   config = {
     archived               = false
@@ -47,9 +67,14 @@ module "admin" {
       team_id     = local.admins_team_id
       permissions = "admin"
     }
+    all = {
+      team_id     = local.teams_ids["all"]
+      permissions = "push"
+    }
   }
 
   reviewers_team_slugs = [local.admins_team_id]
 
   variables = {}
+
 }
