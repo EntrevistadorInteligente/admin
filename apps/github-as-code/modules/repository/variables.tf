@@ -12,6 +12,7 @@ variable "config" {
   description = "The configuration of the repository."
   # TODO: change to optionals
   type = object({
+    default_branch         = string
     archived               = bool
     homepage               = string
     auto_init              = bool
@@ -32,6 +33,7 @@ variable "config" {
     })
   })
   default = {
+    default_branch         = "main"
     archived               = false
     homepage               = ""
     auto_init              = true
@@ -82,33 +84,47 @@ variable "visibility" {
   }
 }
 
-variable "default_branch_name" {
-  description = "The default branch name. Default: main"
-  type        = string
-  default     = "main"
-}
-
-variable "default_branch_protection" {
-  description = "The default branch protection configuration."
-  type = object({
-    enforce_admins                  = bool
-    allows_deletions                = bool
-    require_conversation_resolution = bool
-    required_pull_request_reviews = object({
-      dismiss_stale_reviews      = bool
-      require_code_owner_reviews = bool
-      restrict_dismissals        = bool
+variable "branches" {
+  description = "The branches of the repository with their protection rules. branches = { branch_name = { protection = { ... } }, ... }"
+  type = map(object({
+    protection = object({
+      required_signatures                  = bool
+      enforce_admins                       = bool
+      required_linear_history              = bool
+      allow_force_pushes                   = bool
+      allow_deletions                      = bool
+      block_creations                      = bool
+      required_conversation_resolution     = bool
+      lock_branch                          = bool
+      allow_fork_syncing                   = bool
+      required_pull_request_reviews = object({
+        dismiss_stale_reviews              = bool
+        require_code_owner_reviews         = bool
+        require_last_push_approval         = bool
+        required_approving_review_count    = number
+      })
     })
-  })
+  }))
   default = {
-    enforce_admins                  = true
-    allows_deletions                = false
-    require_conversation_resolution = true
-    required_pull_request_reviews = {
-      dismiss_stale_reviews      = true
-      require_code_owner_reviews = true
-      restrict_dismissals        = false
-    }
+    "main" = {
+      protection = {
+        required_signatures                  = false
+        enforce_admins                       = false
+        required_linear_history              = true
+        allow_force_pushes                   = false
+        allow_deletions                      = false
+        block_creations                      = false
+        required_conversation_resolution     = true
+        lock_branch                          = false
+        allow_fork_syncing                   = false
+        required_pull_request_reviews = {
+          dismiss_stale_reviews              = true
+          require_code_owner_reviews         = true
+          require_last_push_approval         = true
+          required_approving_review_count    = 1
+        }
+      }
+    },
   }
 }
 
@@ -127,9 +143,4 @@ variable "labels" {
     description = optional(string)
   }))
   default = {}
-}
-
-variable "reviewers_team_slugs" {
-  description = "List of reviewers team slug names"
-  type        = list(string)
 }

@@ -1,5 +1,5 @@
 module "admin" {
-  source = "./modules/repository"
+  source = "./modules/admin_repository"
 
   repository_name = "admin"
   description     = "Global GitHub settings for all repositories."
@@ -28,7 +28,7 @@ module "admin" {
     }
   }
 
-  default_branch_name = local.default_branch_name
+  default_branch_name = "main"
 
   default_branch_protection = {
     enforce_admins                  = false
@@ -49,9 +49,14 @@ module "admin" {
     }
   }
 
-  labels = local.labels
-
-  reviewers_team_slugs = [local.admins_team_id]
+  labels = {
+    "duplicate"   = { color = "cfd3d7", description = "This issue or pull request already exists" }
+    "help wanted" = { color = "008672", description = "Extra attention is needed" }
+    "question"    = { color = "d876e3", description = "Further information is requested" }
+    # others
+    "blocked"      = { color = "ff0000", description = "Blocked by another issue" }
+    "dependencies" = { color = "006b75", description = "Dependency updates" }
+  }
 
   variables = {}
 }

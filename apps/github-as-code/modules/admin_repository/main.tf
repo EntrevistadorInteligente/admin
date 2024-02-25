@@ -1,10 +1,3 @@
-locals {
-  branches = [
-    var.default_branch_name,
-    "develop"
-  ]
-}
-
 resource "github_repository" "main" {
   name                        = var.repository_name
   description                 = var.description
@@ -37,13 +30,18 @@ resource "github_branch_default" "main" {
   branch     = var.default_branch_name
 }
 
-resource "github_issue_label" "main" {
-  for_each = var.labels
-
+resource "github_issue_labels" "main" {
   repository  = github_repository.main.name
-  name        = each.key
-  color       = each.value.color
-  description = try(each.value.description, "")
+
+  dynamic "label" {
+    for_each = var.labels
+
+    content {
+      name        = label.key
+      color       = label.value.color
+      description = try(label.value.description, "")
+    }
+  }
 }
 
 resource "github_team_repository" "main" {
@@ -54,13 +52,10 @@ resource "github_team_repository" "main" {
   permission = each.value.permissions
 }
 
-# TODO: pnly for apps repos
-resource "github_branch_protection" "banch_protection" {
-  for_each = toset(local.branches)
-
+resource "github_branch_protection" "main" {
   repository_id = github_repository.main.node_id
 
-  pattern                         = each.value
+  pattern                         = github_branch_default.main.branch
   enforce_admins                  = var.default_branch_protection.enforce_admins
   allows_deletions                = var.default_branch_protection.allows_deletions
   require_conversation_resolution = var.default_branch_protection.require_conversation_resolution

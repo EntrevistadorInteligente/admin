@@ -11,14 +11,45 @@ repository:
   allow_squash_merge: true
   allow_merge_commit: false
   allow_rebase_merge: false
-  allow_update_branch: false
+  allow_update_branch: true
   delete_branch_on_merge: true
   security:
     enableVulnerabilityAlerts: true
 labels:
-  - name: 'added'
-    description: 'Added by safe-settings removing by all default'
-    color: 'ededed'
+  - name: "duplicate"
+    color: "cfd3d7"
+    description: "This issue or pull request already exists"
+  - name: "help wanted"
+    color: "008672"
+    description: "Extra attention is needed"
+  - name: "question"
+    color: "d876e3"
+    description: "Further information is requested"
+  - name: "blocked"
+    color: "ff0000"
+    description: "Blocked by another issue"
+  - name: "dependencies"
+    color: "006b75"
+    description: "Dependency updates"
 teams:
+  - name: "admins"
+    permission: "admin"
   - name: "all"
-    permission: "pull"
+    permission: "push"
+branches:
+  - name: main
+    protection:
+      required_signatures: false
+      enforce_admins: false
+      required_linear_history: false
+      allow_force_pushes: false
+      allow_deletions: false
+      block_creations: false
+      required_conversation_resolution: true
+      lock_branch: false
+      allow_fork_syncing: false
+      required_pull_request_reviews:
+        dismiss_stale_reviews: true
+        require_code_owner_reviews: true
+        require_last_push_approval: false
+        required_approving_review_count: 1

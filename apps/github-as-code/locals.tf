@@ -6,13 +6,12 @@ locals {
   organization_name   = local.org_config.name
   organization_admins = local.org_config.admins
   teams               = local.org_config.teams
-  default_branch_name = local.org_config.default_branch_name
-  labels = {
-    "duplicate"   = { color = "cfd3d7", description = "This issue or pull request already exists" }
-    "help wanted" = { color = "008672", description = "Extra attention is needed" }
-    "question"    = { color = "d876e3", description = "Further information is requested" }
-    # others
-    "blocked"      = { color = "ff0000", description = "Blocked by another issue" }
-    "dependencies" = { color = "006b75", description = "Dependency updates" }
-  }
+  # config for the repositories and common settings
+  repo_common_config_file   = "${path.module}/${var.org_dir_relative}/settings.yml"
+  repo_common_config        = yamldecode(file(local.repo_common_config_file))
+  repository_dir            = "${path.module}/${var.repository_dir_relative}"
+  repository_file_extension = ".yml"
+  repository_files          = fileset(local.repository_dir, "*${local.repository_file_extension}")
+  repository_names          = toset([for file in local.repository_files : trimsuffix(basename(file), local.repository_file_extension)])
+  repository_config         = { for name in local.repository_names : name => yamldecode(file("${local.repository_dir}/${name}${local.repository_file_extension}")) }
 }

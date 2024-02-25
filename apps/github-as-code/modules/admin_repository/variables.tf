@@ -128,8 +128,3 @@ variable "labels" {
   }))
   default = {}
 }
-
-variable "reviewers_team_slugs" {
-  description = "List of reviewers team slug names"
-  type        = list(string)
-}

@@ -1,2 +1,2 @@
-org_dir_relative = "../../.github/"
-
+org_dir_relative        = "../../.github/"
+repository_dir_relative = "../../.github/repos/"
