@@ -65,10 +65,13 @@ resource "github_branch_protection" "main" {
   required_linear_history              = each.value.protection.required_linear_history
   allows_force_pushes                   = each.value.protection.allow_force_pushes
   allows_deletions                      = each.value.protection.allow_deletions
-  blocks_creations                      = each.value.protection.block_creations
   require_conversation_resolution     = each.value.protection.required_conversation_resolution
   lock_branch                          = each.value.protection.lock_branch
   # TODO: allow_fork_syncing                   = each.value.protection.allow_fork_syncing
+
+  restrict_pushes {
+    blocks_creations                      = each.value.protection.block_creations
+  }
 
   required_pull_request_reviews {
     dismiss_stale_reviews              = each.value.protection.required_pull_request_reviews.dismiss_stale_reviews

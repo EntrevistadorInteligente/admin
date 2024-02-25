@@ -80,7 +80,6 @@ locals {
       teams      = merge(try(local.org_config_tf.teams, {}), try(config.teams, {}))
       labels     = merge(try(local.org_config_tf.labels, {}), try(config.labels, {}))
       variables  = merge(try(local.org_config_tf.variables, {}), try(config.variables, {}))
-      # branches   = merge(try(local.org_config_tf.branches, {}), try(local.repository_config[name].branches, {})) # TODO: fix this line, diferent types
       branches   = merge(try(local.org_config_tf.branches, {}), try(config.branches, {}))
       config = {
         default_branch         = try(local.repository_config[name].repository.default_branch, local.repo_common_config.repository.default_branch, "main")
