@@ -1,0 +1,71 @@
+
+repository:
+  name: EntrevistadorInteligente
+  private: false
+  visibility: "public"
+  has_issues: false
+  has_projects: false
+  has_wiki: false
+  default_branch: "develop"
+  gitignore_template: null
+  license_template: null
+  allow_squash_merge: true
+  allow_merge_commit: true
+  allow_rebase_merge: true
+  allow_auto_merge: false
+  delete_branch_on_merge: true
+  archived: false
+  security:
+    enableAutomatedSecurityFixes: true
+labels:
+  - name: "blocked"
+    description: "Blocked by another issue"
+    color: "ff0000"
+  - name: "bug"
+    description: "Something isn't working"
+    color: "d73a4a"
+  - name: "dependencies"
+    description: "Dependency updates"
+    color: "006b75"
+  - name: "documentation"
+    description: "Improvements or additions to documentation"
+    color: "0075ca"
+  - name: "duplicate"
+    description: "This issue or pull request already exists"
+    color: "cfd3d7"
+  - name: "enhancement"
+    description: "New feature or request"
+    color: "a2eeef"
+  - name: "good first issue"
+    description: "Good for newcomers"
+    color: "7057ff"
+  - name: "help wanted"
+    description: "Extra attention is needed"
+    color: "008672"
+  - name: "invalid"
+    description: "This doesn't seem right"
+    color: "e4e669"
+  - name: "question"
+    description: "Further information is requested"
+    color: "d876e3"
+  - name: "wontfix"
+    description: "This will not be worked on"
+    color: "ffffff"
+branches:
+  - name: develop
+    protection:
+      required_signatures: false
+      enforce_admins: false
+      required_linear_history: false
+      allow_force_pushes: false
+      allow_deletions: false
+      block_creations: false
+      required_conversation_resolution: true
+      lock_branch: false
+      allow_fork_syncing: false
+      required_pull_request_reviews:
+        dismiss_stale_reviews: true
+        require_code_owner_reviews: true
+        require_last_push_approval: false
+        required_approving_review_count: 1
+

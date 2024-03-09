@@ -1,0 +1,36 @@
+
+repository:
+  name: landing-entrevistador
+  private: false
+  visibility: "public"
+  has_issues: false
+  has_projects: false
+  has_wiki: false
+  default_branch: "develop"
+  gitignore_template: null
+  license_template: null
+  allow_squash_merge: true
+  allow_merge_commit: true
+  allow_rebase_merge: true
+  allow_auto_merge: false
+  delete_branch_on_merge: true
+  archived: false
+  security:
+    enableAutomatedSecurityFixes: true
+branches:
+  - name: develop
+    protection:
+      required_signatures: false
+      enforce_admins: false
+      required_linear_history: false
+      allow_force_pushes: false
+      allow_deletions: false
+      block_creations: false
+      required_conversation_resolution: true
+      lock_branch: false
+      allow_fork_syncing: false
+      required_pull_request_reviews:
+        dismiss_stale_reviews: true
+        require_code_owner_reviews: true
+        require_last_push_approval: false
+        required_approving_review_count: 1

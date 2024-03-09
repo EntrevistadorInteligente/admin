@@ -27,7 +27,7 @@ resource "github_repository" "main" {
 
 resource "github_branch_default" "main" {
   repository = github_repository.main.name
-  branch     = var.config.default_branch
+  branch     = var.default_branch_name
 }
 
 resource "github_issue_labels" "main" {
@@ -52,34 +52,18 @@ resource "github_team_repository" "main" {
   permission = each.value.permissions
 }
 
-# TODO: only for apps repos
 resource "github_branch_protection" "main" {
-  for_each = var.branches
-
   repository_id = github_repository.main.node_id
 
-  pattern                         = each.key
-
-  # TODO: required_signatures                  = each.value.protection.required_signatures
-  enforce_admins                       = each.value.protection.enforce_admins
-  required_linear_history              = each.value.protection.required_linear_history
-  allows_force_pushes                   = each.value.protection.allow_force_pushes
-  allows_deletions                      = each.value.protection.allow_deletions
-  require_conversation_resolution     = each.value.protection.required_conversation_resolution
-  lock_branch                          = each.value.protection.lock_branch
-  # TODO: allow_fork_syncing                   = each.value.protection.allow_fork_syncing
-
+  pattern                         = github_branch_default.main.branch
+  enforce_admins                  = var.default_branch_protection.enforce_admins
+  allows_deletions                = var.default_branch_protection.allows_deletions
+  require_conversation_resolution = var.default_branch_protection.require_conversation_resolution
 
   required_pull_request_reviews {
-    dismiss_stale_reviews              = each.value.protection.required_pull_request_reviews.dismiss_stale_reviews
-    require_code_owner_reviews         = each.value.protection.required_pull_request_reviews.require_code_owner_reviews
-    require_last_push_approval         = each.value.protection.required_pull_request_reviews.require_last_push_approval
-    required_approving_review_count    = each.value.protection.required_pull_request_reviews.required_approving_review_count
-  }
-
-  restrict_pushes {
-    blocks_creations = each.value.protection.restrict_pushes.blocks_creations
-    push_allowances = each.value.protection.restrict_pushes.push_allowances
+    dismiss_stale_reviews      = var.default_branch_protection.required_pull_request_reviews.dismiss_stale_reviews
+    require_code_owner_reviews = var.default_branch_protection.required_pull_request_reviews.require_code_owner_reviews
+    restrict_dismissals        = var.default_branch_protection.required_pull_request_reviews.restrict_dismissals
   }
 }
 
@@ -95,5 +79,3 @@ resource "github_repository_dependabot_security_updates" "main" {
   repository = github_repository.main.name
   enabled    = var.config.security.enableAutomatedSecurityFixes
 }
-
-# TODO: Create branch if the branch does not exist before adding the branch protection

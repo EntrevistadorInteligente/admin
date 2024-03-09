@@ -13,6 +13,7 @@ teams:
     description: "All members of the organization"
     members:
       - JamiltonQuintero
+      - JamiltonQuintero2 # la cuenta de backup del amigo Jamilton
       - svg153
       - Jorgeivan246
       - Rpeche-pk
@@ -25,4 +26,4 @@ teams:
       - Mathi21as
       - danmondra
       - joaquincorimayo
-default_branch_name: "main"
+      - GAMG-94
