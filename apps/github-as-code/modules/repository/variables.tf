@@ -103,6 +103,10 @@ variable "branches" {
         require_last_push_approval         = bool
         required_approving_review_count    = number
       })
+      restrict_pushes = object({
+        blocks_creations = bool
+        push_allowances = list(string)
+      })
     })
   }))
   default = {
@@ -122,6 +126,10 @@ variable "branches" {
           require_code_owner_reviews         = true
           require_last_push_approval         = true
           required_approving_review_count    = 1
+        }
+        restrict_pushes = {
+          blocks_creations = false
+          push_allowances = []
         }
       }
     },

@@ -25,10 +25,14 @@ locals {
           lock_branch                      = try(branch.protection.lock_branch, false)
           allow_fork_syncing               = try(branch.protection.allow_fork_syncing, false)
           required_pull_request_reviews = {
-            dismiss_stale_reviews           = try(branch.protection.dismiss_stale_reviews, true)
-            require_code_owner_reviews      = try(branch.protection.require_code_owner_reviews, true)
-            require_last_push_approval      = try(branch.protection.require_last_push_approval, true)
-            required_approving_review_count = try(branch.protection.required_approving_review_count, 1)
+            dismiss_stale_reviews           = try(branch.protection.required_pull_request_reviews.dismiss_stale_reviews, true)
+            require_code_owner_reviews      = try(branch.protection.required_pull_request_reviews.require_code_owner_reviews, true)
+            require_last_push_approval      = try(branch.protection.required_pull_request_reviews.require_last_push_approval, true)
+            required_approving_review_count = try(branch.protection.required_pull_request_reviews.required_approving_review_count, 1)
+          }
+          restrict_pushes = {
+            blocks_creations = false
+            push_allowances  = []
           }
         }
       }
@@ -62,10 +66,14 @@ locals {
             lock_branch                      = try(branch.protection.lock_branch, false)
             allow_fork_syncing               = try(branch.protection.allow_fork_syncing, false)
             required_pull_request_reviews = {
-              dismiss_stale_reviews           = try(branch.protection.dismiss_stale_reviews, true)
-              require_code_owner_reviews      = try(branch.protection.require_code_owner_reviews, true)
-              require_last_push_approval      = try(branch.protection.require_last_push_approval, true)
-              required_approving_review_count = try(branch.protection.required_approving_review_count, 1)
+              dismiss_stale_reviews           = try(branch.protection.required_pull_request_reviews.dismiss_stale_reviews, true)
+              require_code_owner_reviews      = try(branch.protection.required_pull_request_reviews.require_code_owner_reviews, true)
+              require_last_push_approval      = try(branch.protection.required_pull_request_reviews.require_last_push_approval, true)
+              required_approving_review_count = try(branch.protection.required_pull_request_reviews.required_approving_review_count, 1)
+            }
+            restrict_pushes = {
+              blocks_creations = false
+              push_allowances  = []
             }
           }
         }

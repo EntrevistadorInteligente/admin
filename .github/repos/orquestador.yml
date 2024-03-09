@@ -6,7 +6,7 @@ repository:
   has_issues: false
   has_projects: false
   has_wiki: false
-  default_branch: "main"
+  default_branch: "develop"
   gitignore_template: null
   license_template: null
   allow_squash_merge: true
@@ -34,4 +34,3 @@ branches:
         require_code_owner_reviews: true
         require_last_push_approval: false
         required_approving_review_count: 1
-
