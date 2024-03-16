@@ -14,6 +14,7 @@ aa: lint apply-approve
 # Targets
 
 .PHONY: plan
+# Generates an execution plan for Terraform
 plan: ## Plan the infrastructure changes
 	$(terraform_project_cmd) plan
 
