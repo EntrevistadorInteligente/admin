@@ -37,4 +37,10 @@ move: ## move resource
 	$(terraform_project_cmd) state mv \
 			'github_repository.admin' 'module.admin.github_repository.main'
 
+ci: ## ci
+	$(terraform_project_cmd) init
+	$(terraform_project_cmd) fmt -check
+	$(terraform_project_cmd) plan -input=false
 
+cd: ## cd
+	$(terraform_project_cmd) apply -auto-approve -input=false
