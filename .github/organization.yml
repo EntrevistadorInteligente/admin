@@ -1,6 +1,7 @@
 name: "EntrevistadorInteligente"
 admins:
   - JamiltonQuintero
+  - JamiltonQuintero2 # la cuenta de backup del amigo Jamilton
   - svg153
 teams:
   - name: "admins"
