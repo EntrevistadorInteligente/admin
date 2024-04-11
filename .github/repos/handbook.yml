@@ -1,4 +1,3 @@
-
 repository:
   name: handbook
   private: false
@@ -22,5 +21,3 @@ teams:
     permission: "admin"
   - name: "all"
     permission: "push"
-
-
